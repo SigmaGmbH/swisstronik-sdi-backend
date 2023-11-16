@@ -4,9 +4,7 @@ import {
   createDidPayload,
   MethodSpecificIdAlgo,
   VerificationMethods, DIDDocumentExternal,
-} from '@swisstronik/sdk'
-
-
+} from '../../sdk'
 
 
 import {
