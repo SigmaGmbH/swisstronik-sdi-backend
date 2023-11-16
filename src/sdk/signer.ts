@@ -15,7 +15,9 @@ import {
 	Account,
 	AccountParser,
 	SequenceResponse,
-	SignerData
+	SignerData,
+	TimeoutError,
+	IndexedTx,
 } from "@cosmjs/stargate"
 import { BaseAccount } from "cosmjs-types/cosmos/auth/v1beta1/auth";
 import { EthAccount } from "./types-proto/ethermint/types/v1/account";
@@ -148,7 +150,14 @@ export class SwisstronikSigningStargateClient extends SigningStargateClient {
 		const txRaw = await this.sign(signerAddress, messages, usedFee, memo);
 		const txBytes = TxRaw.encode(txRaw).finish();
 		console.log(`[sdk::signer.ts] Trying to broadcast tx`)
-		return this.broadcastTx(txBytes, this.broadcastTimeoutMs, this.broadcastPollIntervalMs);
+		try {
+			const res = await this.broadcastTx(txBytes, this.broadcastTimeoutMs, this.broadcastPollIntervalMs);
+			console.log(res)
+			return res
+		} catch (error) {
+			console.log('DEBUG CANNOT BROADCAST TX: ', error)
+			return Promise.reject()
+		}
 	}
 
 	public async sign(

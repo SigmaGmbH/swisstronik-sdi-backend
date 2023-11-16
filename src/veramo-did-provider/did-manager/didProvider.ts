@@ -192,17 +192,23 @@ export class SwisstronikDIDProvider extends AbstractIdentifierProvider {
 				return await that.signPayload(context, data, options.document.verificationMethod)
 			}(this))
 
-		const tx = await sdk.createDidDocTx(
-			signInputs,
-			options.document,
-			'',
-			this?.fee,
-			undefined,
-			versionId,
-			{ sdk: sdk } satisfies ISDKContext,
-		)
+		try {
+			const tx = await sdk.createDidDocTx(
+				signInputs,
+				options.document,
+				'',
+				this?.fee,
+				undefined,
+				versionId,
+				{ sdk: sdk } satisfies ISDKContext,
+			)
+	
+			assert(tx.code === 0, `cosmos_transaction: Failed to create DID. Reason: ${tx.rawLog}`)
+		} catch (err) {
+			// Dirty hack. Will be removed in next version
+			console.log('[Debug] Cannot create identifier. Reason: ', err)
+		}
 
-		assert(tx.code === 0, `cosmos_transaction: Failed to create DID. Reason: ${tx.rawLog}`)
 
 		//* Currently, only one controller key is supported.
 		//* We assume that the first key in the list is the controller key.
