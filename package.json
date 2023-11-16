@@ -42,7 +42,7 @@
     "@lit-protocol/types": "^2.2.54",
     "@swisstronik/sdk": "1.1.1",
     "@swisstronik/utils": "^1.1.1",
-    "@swisstronik/veramo-did-provider": "^1.1.0",
+    "@swisstronik/veramo-did-provider": "1.1.1",
     "@types/uuid": "^9.0.4",
     "@veramo/core-types": "^5.1.2",
     "@veramo/did-manager": "^5.1.2",
