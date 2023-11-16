@@ -184,9 +184,9 @@ export class DIDModule extends AbstractIdentitySDKModule {
 	static readonly baseMinimalDenom = 'uswtr' as const
 
 	static readonly fees = {
-		DefaultCreateDidDocFee: { amount: '7', denom: DIDModule.baseMinimalDenom } as const,
-		DefaultUpdateDidDocFee: { amount: '7', denom: DIDModule.baseMinimalDenom } as const,
-		DefaultDeactivateDidDocFee: { amount: '7', denom: DIDModule.baseMinimalDenom } as const,
+		DefaultCreateDidDocFee: { amount: '1400000', denom: DIDModule.baseMinimalDenom } as const,
+		DefaultUpdateDidDocFee: { amount: '1400000', denom: DIDModule.baseMinimalDenom } as const,
+		DefaultDeactivateDidDocFee: { amount: '1400000', denom: DIDModule.baseMinimalDenom } as const,
 	} as const
 
 	static readonly querierExtensionSetup: QueryExtensionSetup<DidExtension> = setupDidExtension
@@ -571,7 +571,7 @@ export class DIDModule extends AbstractIdentitySDKModule {
 			amount: [
 				DIDModule.fees.DefaultCreateDidDocFee
 			],
-			gas: '360000',
+			gas: '200000',
 			payer: feePayer,
 			granter: granter
 		} as DidStdFee
@@ -582,7 +582,7 @@ export class DIDModule extends AbstractIdentitySDKModule {
 			amount: [
 				DIDModule.fees.DefaultUpdateDidDocFee
 			],
-			gas: '360000',
+			gas: '200000',
 			payer: feePayer,
 			granter: granter
 		} as DidStdFee
@@ -593,7 +593,7 @@ export class DIDModule extends AbstractIdentitySDKModule {
 			amount: [
 				DIDModule.fees.DefaultDeactivateDidDocFee
 			],
-			gas: '360000',
+			gas: '200000',
 			payer: feePayer,
 			granter: granter
 		} as DidStdFee
