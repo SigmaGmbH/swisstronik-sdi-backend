@@ -26,7 +26,12 @@ const create = async (extra_payload:any): Promise<UnsignedCredential & { proof: 
   logger.debug("Created document");
   const identifier = await agent.didManagerCreate({
     provider: 'did:swtr',
-    options: { document },
+    options: { document,
+      fee: {
+        amount: [{denom: "uswtr", amount: "7"}],
+        gas: "200000",
+      }
+    },
   })
   logger.debug("Created manager");
 

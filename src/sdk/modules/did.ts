@@ -19,7 +19,7 @@ import {
 	VerificationMethods,
 	DIDDocumentWithMetadataExternal
 } from '../types.js';
-import { 
+import {
 	MsgCreateDIDDocument,
 	MsgCreateDIDDocumentPayload,
 	MsgCreateDIDDocumentResponse,
@@ -184,9 +184,9 @@ export class DIDModule extends AbstractIdentitySDKModule {
 	static readonly baseMinimalDenom = 'uswtr' as const
 
 	static readonly fees = {
-		DefaultCreateDidDocFee: { amount: '0', denom: DIDModule.baseMinimalDenom } as const,
-		DefaultUpdateDidDocFee: { amount: '0', denom: DIDModule.baseMinimalDenom } as const,
-		DefaultDeactivateDidDocFee: { amount: '0', denom: DIDModule.baseMinimalDenom } as const,
+		DefaultCreateDidDocFee: { amount: '7', denom: DIDModule.baseMinimalDenom } as const,
+		DefaultUpdateDidDocFee: { amount: '7', denom: DIDModule.baseMinimalDenom } as const,
+		DefaultDeactivateDidDocFee: { amount: '7', denom: DIDModule.baseMinimalDenom } as const,
 	} as const
 
 	static readonly querierExtensionSetup: QueryExtensionSetup<DidExtension> = setupDidExtension
@@ -485,7 +485,7 @@ export class DIDModule extends AbstractIdentitySDKModule {
 		const verificationMethod = protobufDidDocument.verificationMethod.map((vm) => {
 			switch (vm.verificationMethodType) {
 				case VerificationMethods.Ed255192020:
-					if (!protobufDidDocument.context.includes(contexts.W3CSuiteEd255192020)) 
+					if (!protobufDidDocument.context.includes(contexts.W3CSuiteEd255192020))
 						protobufDidDocument.context = [...protobufDidDocument.context, contexts.W3CSuiteEd255192020]
 					return {
 						id: vm.id,
@@ -494,7 +494,7 @@ export class DIDModule extends AbstractIdentitySDKModule {
 						publicKeyMultibase: vm.verificationMaterial,
 					}
 				case VerificationMethods.JWK:
-					if (!protobufDidDocument.context.includes(contexts.W3CSuiteJws2020)) 
+					if (!protobufDidDocument.context.includes(contexts.W3CSuiteJws2020))
 						protobufDidDocument.context = [...protobufDidDocument.context, contexts.W3CSuiteJws2020]
 					return {
 						id: vm.id,
