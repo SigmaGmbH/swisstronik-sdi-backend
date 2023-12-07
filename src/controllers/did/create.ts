@@ -4,9 +4,7 @@ import {
   createDidPayload,
   MethodSpecificIdAlgo,
   VerificationMethods, DIDDocumentExternal,
-} from '@swisstronik/sdk'
-
-
+} from '../../sdk'
 
 
 import {
@@ -26,28 +24,34 @@ const create = async (extra_payload:any): Promise<UnsignedCredential & { proof: 
   logger.info(`Started controller`, {payload:extra_payload});
   const document = await createDefaultDIDDocument()
   logger.debug("Created document");
-  const identifier = await agent.didManagerCreate({
-    provider: 'did:swtr',
-    options: { document },
-  })
-  logger.debug("Created manager");
+    const identifier = await agent.didManagerCreate({
+      provider: 'did:swtr',
+      options: { document },
+    })
+    logger.debug("Created DID for issuer: ", identifier);
 
   const credentialSubject = {
-    id: identifier.did,
+    id: document.id,
     kycPassed: true,
     ...extra_payload
   }
+  console.log('Credential subject: ', credentialSubject)
 
-  const credential = await agent.createVerifiableCredential({
-    credential: {
-      issuer: { id: identifier.did },
-      credentialSubject,
-    },
-    proofFormat: 'jwt',
-  });
-  logger.debug("Created creds");
+  try {
+    const credential = await agent.createVerifiableCredential({
+      credential: {
+        issuer: { id: document.id },
+        credentialSubject,
+      },
+      proofFormat: 'jwt',
+    });
+    logger.debug("Created creds");
+    return credential;
+  } catch (error) {
+    logger.debug("Cannot create VC. Reason: ", error)
+  }
 
-  return credential;
+  return Promise.reject()
 };
 
 const createDefaultDIDDocument = async (): Promise<DIDDocumentExternal> => {

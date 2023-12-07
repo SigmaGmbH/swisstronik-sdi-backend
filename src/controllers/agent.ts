@@ -15,7 +15,7 @@ import { DIDManager } from '@veramo/did-manager'
 
 // DID identity provider
 // import { SwisstronikDIDProvider, getResolver as swisstronikResolver} from '../tools/did-manager'
-import { SwisstronikDIDProvider, getResolver as swisstronikResolver } from '@swisstronik/veramo-did-provider'
+import { SwisstronikDIDProvider, getResolver as swisstronikResolver } from '../veramo-did-provider'
 
 // Core key manager plugin
 import { KeyManager } from '@veramo/key-manager'
