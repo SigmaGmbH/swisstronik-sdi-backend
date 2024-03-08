@@ -20,7 +20,7 @@ import {
 	MsgCreateDIDDocumentPayload,
 	MsgDeactivateDIDDocumentPayload,
 	SignInfo
-} from '../../sdk'
+} from '@swisstronik/sdk'
 import {
 	AccountData,
 	Coin,

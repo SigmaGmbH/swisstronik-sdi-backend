@@ -13,7 +13,7 @@ import {
   createKeyPairHex,
   createVerificationKeys,
   AlternativeUri,
-} from '../../sdk'
+} from '@swisstronik/sdk'
 import {
   IAgentPlugin,
   IAgentPluginSchema,
