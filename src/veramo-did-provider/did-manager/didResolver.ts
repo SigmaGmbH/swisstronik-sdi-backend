@@ -8,7 +8,7 @@ import {
 } from 'did-resolver'
 import {
   VerificationMethods,
-} from '../../sdk'
+} from '@swisstronik/sdk'
 import { bases } from 'multiformats/basics'
 
   interface Options {
